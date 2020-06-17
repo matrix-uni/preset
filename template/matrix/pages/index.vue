@@ -28,7 +28,7 @@ export default {
 
 .logo {
   height: 200rpx;
-  width: 200rpx;
+  width: 400rpx;
   margin-top: 200rpx;
 }
 
