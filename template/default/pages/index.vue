@@ -4,7 +4,7 @@
     <view class="title">
       <text>Hello, {{ title }}</text>
     </view>
-    <mx-button>开始</mx-button>
+    <mx-button @click="onClick">开始</mx-button>
     <pro-input v-model="title" />
   </view>
 </template>
@@ -13,11 +13,15 @@
 export default {
   data() {
     return {
-      title: 'Matrix',
+      title: "Matrix",
     };
   },
   onLoad() {},
-  methods: {},
+  methods: {
+    onClick() {
+      this.title = "Matrix";
+    },
+  },
 };
 </script>
 

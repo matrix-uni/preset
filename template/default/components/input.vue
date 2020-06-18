@@ -1,5 +1,7 @@
 <template>
-  <mx-input :value="value" @input="onInput" />
+  <view class="input-wrapper">
+    <mx-input :value="value" @input="onInput" />
+  </view>
 </template>
 
 <script>
@@ -19,3 +21,12 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.input-wrapper {
+  margin: 50rpx 100rpx;
+  padding: 10rpx;
+  background-color: #f7f7f7;
+  border: 2rpx solid #eee;
+}
+</style>
