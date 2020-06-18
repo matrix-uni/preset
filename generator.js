@@ -1,13 +1,13 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-const isBinary = require('isbinaryfile');
+const isBinary = require("isbinaryfile");
 
-async function generate(dir, files, base = '', rootOptions = {}) {
-  const glob = require('glob');
+async function generate(dir, files, base = "", rootOptions = {}) {
+  const glob = require("glob");
 
   glob
-    .sync('**/*', {
+    .sync("**/*", {
       cwd: dir,
       nodir: true,
     })
@@ -18,13 +18,13 @@ async function generate(dir, files, base = '', rootOptions = {}) {
       if (isBinary.sync(sourcePath)) {
         files[filename] = fs.readFileSync(sourcePath); // return buffer
       } else {
-        let content = fs.readFileSync(sourcePath, 'utf-8');
-        if (path.basename(filename) === 'manifest.json') {
-          content = content.replace('{{name}}', rootOptions.projectName || '');
+        let content = fs.readFileSync(sourcePath, "utf-8");
+        if (path.basename(filename) === "manifest.json") {
+          content = content.replace("{{name}}", rootOptions.projectName || "");
         }
-        if (filename.charAt(0) === '_' && filename.charAt(1) !== '_') {
+        if (filename.charAt(0) === "_" && filename.charAt(1) !== "_") {
           files[`.${filename.slice(1)}`] = content;
-        } else if (filename.charAt(0) === '_' && filename.charAt(1) === '_') {
+        } else if (filename.charAt(0) === "_" && filename.charAt(1) === "_") {
           files[`${filename.slice(1)}`] = content;
         } else {
           files[filename] = content;
@@ -37,17 +37,17 @@ module.exports = (api, options, rootOptions) => {
   api.extendPackage((pkg) => {
     return {
       dependencies: {
-        'regenerator-runtime': '^0.12.1', // 锁定版本，避免高版本在小程序中出错
-        '@dcloudio/uni-helper-json': '*',
+        "regenerator-runtime": "^0.12.1", // 锁定版本，避免高版本在小程序中出错
+        "@dcloudio/uni-helper-json": "*",
       },
       devDependencies: {
-        'postcss-comment': '^2.0.0',
-        '@dcloudio/types': '*',
-        'miniprogram-api-typings': '*',
-        'mini-types': '*',
-        'node-sass': '^4.0.0',
-        'sass-loader': '^8.0.0',
-        '@chinapnr/matrix-uni': '^3.0.0',
+        "postcss-comment": "^2.0.0",
+        "@dcloudio/types": "*",
+        "miniprogram-api-typings": "*",
+        "mini-types": "*",
+        "node-sass": "^4.0.0",
+        "sass-loader": "^8.0.0",
+        "@chinapnr/matrix-uni": "^3.0.0",
       },
     };
   });
@@ -59,23 +59,23 @@ module.exports = (api, options, rootOptions) => {
 
     const template = options.repo || options.template;
 
-    const base = 'src';
-    await generate(path.resolve(__dirname, './template/common'), files);
-    if (template === 'matrix') {
-      await generate(path.resolve(__dirname, './template/matrix'), files, base, rootOptions);
+    const base = "src";
+    await generate(path.resolve(__dirname, "./template/common"), files);
+    if (template !== "custom") {
+      await generate(path.resolve(__dirname, "./template/" + template), files, base, rootOptions);
     } else {
-      const ora = require('ora');
-      const home = require('user-home');
-      const download = require('download-git-repo');
+      const ora = require("ora");
+      const home = require("user-home");
+      const download = require("download-git-repo");
 
-      const spinner = ora('模板下载中...');
+      const spinner = ora("模板下载中...");
       spinner.start();
 
-      const tmp = path.join(home, '.uni-app/templates', template.replace(/[/:]/g, '-'), 'src');
+      const tmp = path.join(home, ".uni-app/templates", template.replace(/[/:]/g, "-"), "src");
 
       if (fs.existsSync(tmp)) {
         try {
-          require('rimraf').sync(tmp);
+          require("rimraf").sync(tmp);
         } catch (e) {
           console.error(e);
         }

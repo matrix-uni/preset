@@ -1,31 +1,35 @@
 module.exports = [
   {
-    type: 'list',
-    name: 'template',
-    message: '请选择模板',
+    type: "list",
+    name: "template",
+    message: "请选择模板",
     choices: [
       {
-        name: 'Matrix',
-        value: 'matrix',
+        name: "Matrix",
+        value: "matrix",
       },
       {
-        name: '自定义模板',
-        value: 'custom',
+        name: "Default",
+        value: "default",
+      },
+      {
+        name: "自定义模板",
+        value: "custom",
       },
     ],
-    default: 'None',
+    default: "None",
   },
   {
-    when: (answers) => answers.template === 'custom',
-    type: 'input',
-    name: 'repo',
-    message: '请输入自定义模板地址',
+    when: (answers) => answers.template === "custom",
+    type: "input",
+    name: "repo",
+    message: "请输入自定义模板地址",
     filter(input) {
       return new Promise(function (resolve, reject) {
         if (input) {
           resolve(input);
         } else {
-          reject(new Error('模板地址不能为空'));
+          reject(new Error("模板地址不能为空"));
         }
       });
     },
