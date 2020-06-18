@@ -57,7 +57,7 @@ module.exports = (api, options, rootOptions) => {
       delete files[name];
     });
 
-    const template = options.repo || options.template;
+    const template = "default"; //options.repo || options.template;
 
     const base = "src";
     await generate(path.resolve(__dirname, "./template/common"), files);
