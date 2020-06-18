@@ -5,6 +5,7 @@
       <text>Hello, {{ title }}</text>
     </view>
     <mx-button>开始</mx-button>
+    <pro-input v-model="title" />
   </view>
 </template>
 

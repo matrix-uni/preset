@@ -11,6 +11,7 @@
   "easycom": {
     "autoscan": false,
     "custom": {
+      "pro-(.*)": "@/components/$1.vue",
       "mx-(.*)": "@chinapnr/matrix-uni/lib/$1/index.vue"
     }
   },

@@ -1,6 +1,6 @@
 <template>
-  <view class="content">
-    {{data1}}
+  <view>
+    
   </view>
 </template>
 
@@ -8,32 +8,24 @@
 export default {
   data() {
     return {
-      data1: '123',
+
     };
   },
   onLoad() {
 
   },
   methods: {
-    onClick(){
 
-    }
-  },
-  watch: {
-    data1(v) {
-
-    },
   },
   computed: {
-    data2() {
-      return 'data2'
-    },
+
+  },
+  watch: {
+
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.content{
-  color: inherit;
-}
+
 </style>
